@@ -23,7 +23,7 @@ router.route('/')
 
             res.json(newUser);
         } catch (err) {
-            res.json(err);
+            res.status(401).json(err);
         }
     });
 
