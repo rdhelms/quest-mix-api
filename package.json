@@ -11,12 +11,12 @@
   },
   "scripts": {
     "start": "node -r dotenv/config dist/src/app.js",
-    "test": "cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
+    "restart": "npm run build-clean && npm run lint && npm test && npm start",
     "build": "tsc",
     "build-clean": "del-cli dist && npm run build",
-    "restart": "npm run lint && npm run build-clean && npm start",
     "build-watch": "tsc --watch",
     "lint": "tslint --project tsconfig.json --config tslint.json --format verbose",
+    "test": "cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
     "coverage": "nyc npm test",
     "view-coverage": "opn coverage/lcov-report/index.html"
   },

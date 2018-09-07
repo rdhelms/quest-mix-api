@@ -50,6 +50,9 @@ Building the App
 ============
 `npm run build`
 
+#### Delete dist folder and then rebuild
+`npm run build-clean`
+
 #### Build and watch for changes
 `npm run build-watch`
 
@@ -72,7 +75,7 @@ Starting the App
 
 `npm start`
 
-To run the linter, delete the `dist` folder, compile the app, and start the server:\
+To delete and build the `dist` folder, run the linter, run the tests, and start the server:\
 `npm restart`
 
 Deploying the App
