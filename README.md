@@ -75,7 +75,7 @@ Starting the App
 
 `npm start`
 
-To delete and build the `dist` folder, run the linter, run the tests, and start the server:\
+To delete and build the `dist` folder, run the linter, and start the server:\
 `npm restart`
 
 Deploying the App
