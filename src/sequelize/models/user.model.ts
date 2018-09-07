@@ -1,10 +1,11 @@
-import { Model, Table, Column, DataType } from 'sequelize-typescript';
+import { Model, Table, Column, DataType, Unique } from 'sequelize-typescript';
 
 @Table({
     tableName: 'users'
 })
 export default class User extends Model<User> {
 
+    @Unique
     @Column
     username!: string;
 
