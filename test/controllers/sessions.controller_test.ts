@@ -3,7 +3,7 @@ import axios from 'axios';
 import bcrypt from 'bcrypt';
 import User from '../../src/sequelize/models/user.model';
 
-describe('controllers | login', function() {
+describe('controllers | sessions', function() {
     let bobross: User;
     before(async function() {
         const username = 'bobross';
@@ -15,15 +15,15 @@ describe('controllers | login', function() {
         });
         bobross = JSON.parse(JSON.stringify(bobross)) as User;
     });
-    describe('POST to /login', function() {
+    describe('POST to /sessions', function() {
         let response: unknown;
         before(async function() {
-            response = (await axios.post<unknown>('http://localhost:3000/login', {
+            response = (await axios.post<unknown>('http://localhost:3000/sessions', {
                 username: 'bobross',
                 password: 'paints'
             })).data;
         });
-        it('returns user object', async function() {
+        it('returns user object', function() {
             expect(response).to.deep.equal(bobross);
         });
     });

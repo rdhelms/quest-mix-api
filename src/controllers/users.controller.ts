@@ -1,21 +1,16 @@
 import express from 'express';
-const router = express.Router();
 import bcrypt from 'bcrypt';
 import User from '../sequelize/models/user.model';
+const usersController = express.Router();
 
-interface IReqBody {
-    username: string;
-    password: string;
-}
-
-router.route('/')
+usersController.route('/')
     .post(async (req, res) => {
         try {
-            const body = req.body as IReqBody;
+            const body = req.body as User;
 
             // Encrypt password using bcrypt
             const hash = await bcrypt.hash(body.password, 10);
-    
+
             const newUser = await User.create({
                 username: body.username,
                 password: hash
@@ -27,4 +22,4 @@ router.route('/')
         }
     });
 
-export { router };
+export { usersController };

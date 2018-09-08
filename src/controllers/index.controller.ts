@@ -1,7 +1,7 @@
 import express from 'express';
-const router = express.Router();
+const indexController = express.Router();
 
-router.route('/')
+indexController.route('/')
     .get(async (req, res) => {
         try {
             res.send('Welcome to the Quest Mix API');
@@ -11,4 +11,4 @@ router.route('/')
         }
     });
 
-export { router };
+export { indexController };
