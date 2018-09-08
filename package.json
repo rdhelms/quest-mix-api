@@ -16,7 +16,7 @@
     "build-clean": "del-cli dist && npm run build",
     "build-watch": "tsc --watch",
     "lint": "tslint --project tsconfig.json --config tslint.json --format verbose",
-    "test": "npm run build-clean && cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
+    "test": "npm run build-clean && npm run lint && cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
     "coverage": "nyc npm test",
     "view-coverage": "opn coverage/lcov-report/index.html"
   },
