@@ -42,7 +42,7 @@ Create a root `.env` file with contents in the format VAR=VALUE in order to spec
 For example,
 ```
 TEST_DATABASE_URL=postgres://localhost/quest_mix_api_test
-DATABASE_URL=postgres://localhost/quest)mix_api_dev
+DATABASE_URL=postgres://localhost/quest_mix_api_dev
 NODE_ENV=development
 ```
 
