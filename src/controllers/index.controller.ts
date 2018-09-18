@@ -6,8 +6,7 @@ indexController.route('/')
         try {
             res.send('Welcome to the Quest Mix API');
         } catch(err) {
-            console.error(err);
-            res.status(500).send(`Error: ${JSON.stringify(err, null, 4)}`);
+            res.status(500).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
     });
 

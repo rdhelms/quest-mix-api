@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session() as RequestHandler);
 passport.serializeUser((user: User, done) => {
-    done(null, user.id as number);
+    done(null, user.id);
 });
 passport.deserializeUser(async (id, done) => {
     try {
