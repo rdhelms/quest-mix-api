@@ -20,6 +20,8 @@
     "build-watch": "tsc --watch",
     "lint": "tslint --project tsconfig.json --config tslint.json --format verbose",
     "test": "npm run build-clean && npm run lint && cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
+    "debug-tests": "npm test -- --inspect-brk",
+    "debug-server": "npm run build-clean && node --inspect-brk -r dotenv/config dist/src/app.js",
     "coverage": "nyc npm test",
     "view-coverage": "opn coverage/lcov-report/index.html"
   },
