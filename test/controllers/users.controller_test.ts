@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import axios from 'axios';
-import bcrypt from 'bcrypt';
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import bcrypt from 'bcryptjs';
 import User from '../../src/sequelize/models/user.model';
 
 describe('controllers | users', function() {
@@ -43,19 +43,47 @@ describe('controllers | users', function() {
     });
     describe('PATCH to /users/:userId', function() {
         let response: User;
+        let hash: string;
         before(async function() {
-            const hash = await bcrypt.hash('pass1', 10);
+            hash = await bcrypt.hash('pass1', 10);
             await User.create({username: 'user1', password: hash});
             response = (await axios.patch<User>('http://localhost:3000/users/1', {
                 username: 'user1',
                 password: 'pass1',
                 newInfo: {
-                    provider: 'self'
+                    provider: 'self',
+                    password: 'newPassword'
                 }
             })).data;
         });
-        it('returns modified user object', function() {
+        it('returns user with new provider value', function() {
             expect(response.provider).to.equal('self');
+        });
+        it('returns user with new password value', function() {
+            expect(response.password).to.not.equal(hash);
+        });
+    });
+    describe('PATCH to /users/:userId with unauthorized user', function() {
+        let response: AxiosResponse<unknown>;
+        before(async function() {
+            const hash1 = await bcrypt.hash('pass1', 10);
+            const hash2 = await bcrypt.hash('pass2', 10);
+            await User.create({username: 'user1', password: hash1});
+            await User.create({username: 'user2', password: hash2});
+            try {
+                (await axios.patch<User>('http://localhost:3000/users/1', {
+                    username: 'user2',
+                    password: 'pass2',
+                    newInfo: {
+                        provider: 'self'
+                    }
+                }));
+            } catch (e) {
+                response = (<AxiosError>e).response!;
+            }
+        });
+        it('returns 401', function() {
+            expect(response.status).to.equal(401);
         });
     });
 });

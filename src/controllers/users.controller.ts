@@ -1,5 +1,5 @@
 import express, { RequestHandler } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import User from '../sequelize/models/user.model';
 import passport from 'passport';
 
@@ -11,6 +11,7 @@ usersController.route('/')
             const users = await User.findAll();
             res.json(users);
         } catch (err) {
+            /* istanbul ignore next */
             res.status(500).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
     })
@@ -28,6 +29,7 @@ usersController.route('/')
 
             res.json(newUser);
         } catch (err) {
+            /* istanbul ignore next */
             res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
     });
@@ -48,6 +50,7 @@ usersController.route('/:userId')
 
             res.json(user);
         } catch (err) {
+            /* istanbul ignore next */
             res.status(500).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
     })
@@ -90,9 +93,11 @@ usersController.route('/:userId')
             if (result[0] > 0) {
                 res.json(result[1][0]);
             } else {
+                /* istanbul ignore next */
                 res.status(400).json(result);
             }
         } catch (err) {
+            /* istanbul ignore next */
             res.status(500).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
     });

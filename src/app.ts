@@ -51,9 +51,11 @@ passport.deserializeUser(async (id, done) => {
         if (user) {
             done(null, user);
         } else {
+            /* istanbul ignore next */
             throw new Error('No user found');
         }
     } catch (err) {
+        /* istanbul ignore next */
         done(err);
     }
 });
@@ -64,6 +66,7 @@ app.use('/', indexController);
 app.use('/sessions', sessionsController);
 app.use('/users', usersController);
 
+/* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
     const port = process.env.PORT || 3000;
     app.listen(port, () => {

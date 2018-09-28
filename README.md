@@ -12,7 +12,7 @@ Tools Summary
     * [Sequelize](http://docs.sequelizejs.com/)
 * Authentication
     * [Passport](http://www.passportjs.org/docs/) 
-    * [bcrypt](https://www.npmjs.com/package/bcrypt)
+    * [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 * Testing
     * [Mocha](https://mochajs.org/)
     * [Chai](http://www.chaijs.com/api/bdd/)
@@ -22,7 +22,7 @@ Tools Summary
 
 Prerequisites
 ============
-Install Node, PostgreSQL, and all [dependencies for bcrypt](https://www.npmjs.com/package/bcrypt#dependencies)
+Install Node and PostgreSQL
 
 Run the following to create the test and dev databases:
 ```

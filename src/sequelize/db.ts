@@ -11,6 +11,7 @@ export const sequelize = new Sequelize({
     modelPaths: [`${__dirname}/models`],
     logging: false
 });
+/* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
     sequelize.authenticate();
     sequelize.sync();
