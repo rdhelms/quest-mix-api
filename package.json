@@ -29,11 +29,13 @@
   "author": "Robert Helms <robert.helms@smashingboxes.com>",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.4",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-session-sequelize": "^5.2.2",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
     "debug": "^4.0.1",
     "del-cli": "^1.1.0",
     "dotenv": "^6.0.0",
