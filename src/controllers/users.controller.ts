@@ -20,12 +20,9 @@ usersController.route('/')
             const body = req.body as User;
 
             // Encrypt password using bcrypt
-            const hash = await bcrypt.hash(body.password, 10);
+            body.password = await bcrypt.hash(body.password, 10);
 
-            const newUser = await User.create({
-                username: body.username,
-                password: hash
-            });
+            const newUser = await User.create(body);
 
             res.json(newUser);
         } catch (err) {
