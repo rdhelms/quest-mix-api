@@ -11,6 +11,11 @@ import User from './sequelize/models/user.model';
 import { indexController } from './controllers/index.controller';
 import { usersController } from './controllers/users.controller';
 import { sessionsController } from './controllers/sessions.controller';
+import { backgroundsController } from './controllers/backgrounds.controller';
+import { foregroundsController } from './controllers/foregrounds.controller';
+import { objectsController } from './controllers/objects.controller';
+import { entitiesController } from './controllers/entities.controller';
+import { avatarsController } from './controllers/avatars.controller';
 
 const app = express();
 
@@ -37,9 +42,14 @@ app.use(session({
 }));
 
 // Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ 
+    extended: false,
+    limit: '50mb'
+}));
 // Parse application/json
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
 
 // Authentication middleware
 app.use(passport.initialize());
@@ -71,6 +81,11 @@ passport.use(localStrategy);
 app.use('/', indexController);
 app.use('/sessions', sessionsController);
 app.use('/users', usersController);
+app.use('/backgrounds', backgroundsController);
+app.use('/foregrounds', foregroundsController);
+app.use('/objects', objectsController);
+app.use('/entities', entitiesController);
+app.use('/avatars', avatarsController);
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
