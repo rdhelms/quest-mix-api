@@ -12,6 +12,17 @@ foregroundsController.route('/')
             /* istanbul ignore next */
             res.status(500).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
+    })
+    .post(async (req, res) => {
+        try {
+            const body = req.body as Foreground;
+            if (body.id) delete body.id;
+            const newForeground = Foreground.create(body);
+            res.json(newForeground);
+        } catch (err) {
+            /* istanbul ignore next */
+            res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
+        }
     });
 
 export { foregroundsController };
