@@ -17,8 +17,69 @@ backgroundsController.route('/')
         try {
             const body = req.body as Background;
             if (body.id) delete body.id;
-            const newBackground = Background.create(body);
+            const newBackground = await Background.create(body);
             res.json(newBackground);
+        } catch (err) {
+            /* istanbul ignore next */
+            res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
+        }
+    });
+
+backgroundsController.route('/:id')
+    .get(async (req, res) => {
+        try {
+            const { id } = req.params as {
+                id: string;
+            };
+
+            const background = await Background.findOne({
+                where: {
+                    id: Number(id)
+                }
+            });
+            res.json(background);
+        } catch (err) {
+            /* istanbul ignore next */
+            res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
+        }
+    })
+    .patch(async (req, res) => {
+        try {
+            const { id } = req.params as {
+                id: string;
+            };
+
+            const result = await Background.update(req.body as Background, {
+                where: {
+                    id: Number(id)
+                },
+                returning: true
+            });
+
+            if (result[0] > 0) {
+                res.json(result[1][0]);
+            } else {
+                /* istanbul ignore next */
+                res.status(400).json(result);
+            }
+        } catch (err) {
+            /* istanbul ignore next */
+            res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
+        }
+    })
+    .delete(async (req, res) => {
+        try {
+            const { id } = req.params as {
+                id: string;
+            };
+
+            const result = await Background.destroy({
+                where: {
+                    id: Number(id)
+                }
+            });
+
+            res.json(result);
         } catch (err) {
             /* istanbul ignore next */
             res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
