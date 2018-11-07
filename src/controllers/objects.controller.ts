@@ -16,7 +16,7 @@ objectsController.route('/')
         try {
             const body = req.body as SceneObject;
             if (body.id) delete body.id;
-            const newSceneObject = SceneObject.create(body);
+            const newSceneObject = await SceneObject.create(body);
             res.json(newSceneObject);
         } catch (err) {
             /* istanbul ignore next */

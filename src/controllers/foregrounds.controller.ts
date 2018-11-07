@@ -17,7 +17,7 @@ foregroundsController.route('/')
         try {
             const body = req.body as Foreground;
             if (body.id) delete body.id;
-            const newForeground = Foreground.create(body);
+            const newForeground = await Foreground.create(body);
             res.json(newForeground);
         } catch (err) {
             /* istanbul ignore next */

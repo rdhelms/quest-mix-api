@@ -16,7 +16,7 @@ entitiesController.route('/')
         try {
             const body = req.body as Entity;
             if (body.id) delete body.id;
-            const newEntity = Entity.create(body);
+            const newEntity = await Entity.create(body);
             res.json(newEntity);
         } catch (err) {
             /* istanbul ignore next */

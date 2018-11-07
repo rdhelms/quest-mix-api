@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import axios from 'axios';
 
-describe('app_name', function() {
+describe('app_index', function() {
     describe('GET to /', function() {
         let response: unknown;
         before(async function() {

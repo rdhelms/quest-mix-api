@@ -31,7 +31,7 @@ describe('controllers | users', function() {
             expect(response.password).to.not.equal('paints');
         });
     });
-    describe('GET to /users/:userId', function() {
+    describe('GET to /users/:id', function() {
         let response: User;
         before(async function() {
             await User.create({username: 'user1', password: 'pass1'});
@@ -41,7 +41,7 @@ describe('controllers | users', function() {
             expect(response.id).to.equal(1);
         });
     });
-    describe('PATCH to /users/:userId', function() {
+    describe('PATCH to /users/:id', function() {
         let response: User;
         let hash: string;
         before(async function() {
@@ -63,7 +63,7 @@ describe('controllers | users', function() {
             expect(response.password).to.not.equal(hash);
         });
     });
-    describe('PATCH to /users/:userId with unauthorized user', function() {
+    describe('PATCH to /users/:id with unauthorized user', function() {
         let response: AxiosResponse<unknown>;
         before(async function() {
             const hash1 = await bcrypt.hash('pass1', 10);
