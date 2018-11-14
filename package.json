@@ -13,10 +13,11 @@
     "reporter": "lcov"
   },
   "scripts": {
-    "start": "node -r dotenv/config dist/src/app.js",
-    "restart": "npm run build-clean && npm run lint && npm start",
+    "start": "npm run lint && node -r dotenv/config dist/src/app.js",
+    "restart": "npm run clean && npm run build-watch",
     "build": "tsc",
-    "build-clean": "del-cli dist && npm run build",
+    "build-clean": "npm run clean && npm run build",
+    "clean": "del-cli dist",
     "build-watch": "tsc-watch --onSuccess 'npm start'",
     "lint": "tslint --project tsconfig.json --config tslint.json --format verbose",
     "test": "npm run build-clean && npm run lint && cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
@@ -24,7 +25,8 @@
     "debug-server": "npm run build-clean && node --inspect-brk -r dotenv/config dist/src/app.js",
     "coverage": "nyc npm test",
     "view-coverage": "opn coverage/lcov-report/index.html",
-    "check-coverage": "nyc check-coverage --lines 100 --statements 100"
+    "check-coverage": "nyc check-coverage --lines 100 --statements 100",
+    "postinstall": "npm run build"
   },
   "author": "Robert Helms <robert.helms@smashingboxes.com>",
   "license": "ISC",
@@ -46,7 +48,7 @@
     "passport-local": "^1.0.0",
     "pg": "^7.6.1",
     "reflect-metadata": "^0.1.12",
-    "sequelize": "^4.41.0",
+    "sequelize": "^4.41.2",
     "sequelize-typescript": "^0.6.6"
   },
   "devDependencies": {
