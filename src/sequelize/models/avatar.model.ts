@@ -24,5 +24,5 @@ export default class Avatar extends Model<Avatar> {
     name!: string;
 
     @Column(DataType.ARRAY(DataType.JSON))
-    frames!: TFrame;
+    frames!: TFrame[];
 }

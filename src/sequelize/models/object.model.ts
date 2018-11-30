@@ -24,5 +24,5 @@ export default class SceneObject extends Model<SceneObject> {
     name!: string;
 
     @Column(DataType.ARRAY(DataType.JSON))
-    frames!: TFrame;
+    frames!: TFrame[];
 }

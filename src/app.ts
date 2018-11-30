@@ -16,6 +16,7 @@ import { foregroundsController } from './controllers/foregrounds.controller';
 import { objectsController } from './controllers/objects.controller';
 import { entitiesController } from './controllers/entities.controller';
 import { avatarsController } from './controllers/avatars.controller';
+import { worldsController } from './controllers/worlds.controller';
 
 const app = express();
 
@@ -86,6 +87,7 @@ app.use('/foregrounds', foregroundsController);
 app.use('/objects', objectsController);
 app.use('/entities', entitiesController);
 app.use('/avatars', avatarsController);
+app.use('/worlds', worldsController);
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {

@@ -24,5 +24,5 @@ export default class Entity extends Model<Entity> {
     name!: string;
 
     @Column(DataType.ARRAY(DataType.JSON))
-    frames!: TFrame;
+    frames!: TFrame[];
 }

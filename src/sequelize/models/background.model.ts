@@ -24,5 +24,5 @@ export default class Background extends Model<Background> {
     name!: string;
 
     @Column(DataType.ARRAY(DataType.JSON))
-    frames!: TFrame;
+    frames!: TFrame[];
 }
