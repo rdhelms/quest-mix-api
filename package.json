@@ -41,7 +41,7 @@
     "cors": "^2.8.5",
     "debug": "^4.1.0",
     "del-cli": "^1.1.0",
-    "dotenv": "^6.1.0",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "opn-cli": "^4.0.0",
@@ -71,6 +71,6 @@
     "nyc": "^13.1.0",
     "tsc-watch": "^1.0.31",
     "tslint": "^5.11.0",
-    "typescript": "^3.2.1"
+    "typescript": "^3.2.2"
   }
 }
