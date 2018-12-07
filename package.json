@@ -20,7 +20,7 @@
     "clean": "del-cli dist",
     "build-watch": "tsc-watch --onSuccess 'npm start'",
     "lint": "npm run tslint -s || true",
-    "tslint": "tslint --project tsconfig.json --config tslint.json --format stylish && echo 'No Lint Errors!'",
+    "tslint": "echo 'Linting...' && tslint --project tsconfig.json --config tslint.json --format stylish && echo 'All files pass linting.'",
     "test": "npm run build-clean && npm run lint && cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
     "debug-tests": "npm run build-clean && cross-env NODE_ENV=test mocha --inspect-brk --recursive dist/test --delay -r dotenv/config",
     "debug-server": "npm run build-clean && node --inspect-brk -r dotenv/config dist/src/app.js",
