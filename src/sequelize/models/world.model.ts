@@ -13,7 +13,6 @@ export interface IPlayer {
         height: number;
     };
     color: string;
-    sceneId: number;
 }
 
 export interface ISceneObj {
@@ -26,6 +25,10 @@ export interface ISceneObj {
         height: number;
     };
     color: string;
+}
+
+export interface ISettings {
+    speed: number;
 }
 
 export interface IScene {
@@ -49,8 +52,14 @@ export default class World extends Model<World> {
     @Column(DataType.JSON)
     player!: IPlayer;
 
+    @Column(DataType.JSON)
+    settings!: ISettings;
+
     @Column(DataType.ARRAY(DataType.JSON))
     scenes!: IScene[];
+
+    @Column
+    currentSceneId!: number;
 
     @ForeignKey(() => User)
     @Column
