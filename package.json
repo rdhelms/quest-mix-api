@@ -2,7 +2,8 @@
   "name": "quest-mix-api",
   "version": "1.0.1",
   "engines": {
-    "node": "8.11.3"
+    "npm": "6.4.1",
+    "node": "10.13.0"
   },
   "description": "",
   "main": "dist/src/app.js",
