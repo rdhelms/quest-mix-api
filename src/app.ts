@@ -17,6 +17,7 @@ import { objectsController } from './controllers/objects.controller';
 import { entitiesController } from './controllers/entities.controller';
 import { avatarsController } from './controllers/avatars.controller';
 import { worldsController } from './controllers/worlds.controller';
+import { playersController } from './controllers/players.controller';
 
 const app = express();
 
@@ -88,6 +89,7 @@ app.use('/objects', objectsController);
 app.use('/entities', entitiesController);
 app.use('/avatars', avatarsController);
 app.use('/worlds', worldsController);
+app.use('/players', playersController);
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {

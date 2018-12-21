@@ -1,35 +1,10 @@
 import express from 'express';
 import World from '../sequelize/models/world.model';
 import User from '../sequelize/models/user.model';
+import Player from '../sequelize/models/player.model';
+import Avatar from '../sequelize/models/avatar.model';
 
 const worldsController = express.Router();
-
-const defaultWorld: Partial<World> = {
-    id: 0,
-    name: 'No Name',
-    player: {
-        speed: 0,
-        size: {
-            width: 5,
-            height: 10
-        },
-        color: '#FFFFFF',
-        direction: 'down',
-        pos: {
-            x: 0,
-            y: 0
-        }
-    },
-    settings: {
-        speed: 1
-    },
-    scenes: [{
-        id: 0,
-        objects: []
-    }],
-    currentSceneId: 0,
-    ownerId: 0
-};
 
 worldsController.route('/')
     .get(async (req, res) => {
@@ -52,12 +27,8 @@ worldsController.route('/')
                 throw new Error('Unauthorized');
             }
 
-            let body = req.body as Partial<World>;
-            if (!body || Object.keys(body).length === 0) {
-                body = defaultWorld;
-            } else {
-                if (body.id) delete body.id;
-            }
+            const body = req.body as Partial<World>;
+            if (body.id) delete body.id;
             body.ownerId = user.id;
             const newWorld = await World.create(body);
             res.json(newWorld);
@@ -73,16 +44,16 @@ worldsController.route('/:id')
             const { id } = req.params as {
                 id: string;
             };
-            if (id === 'default') {
-                return res.json(defaultWorld);
-            } else {
-                const world = await World.findOne({
-                    where: {
-                        id: Number(id)
-                    }
-                });
-                res.json(world);
-            }
+            const world = await World.findOne({
+                where: {
+                    id: Number(id)
+                },
+                include: [
+                    { model: Player, include: [ Avatar ] },
+                    { model: User }
+                ]
+            });
+            res.json(world);
         } catch (err) {
             /* istanbul ignore next */
             res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);

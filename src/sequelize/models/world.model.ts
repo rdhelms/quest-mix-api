@@ -1,19 +1,6 @@
 import { Model, Table, Column, PrimaryKey, AutoIncrement, BelongsTo, DataType, ForeignKey } from 'sequelize-typescript';
 import User from './user.model';
-
-export interface IPlayer {
-    pos: {
-        x: number;
-        y: number;
-    };
-    direction: 'left' | 'right' | 'up' | 'down';
-    speed: number;
-    size: {
-        width: number;
-        height: number;
-    };
-    color: string;
-}
+import Player from './player.model';
 
 export interface ISceneObj {
     pos: {
@@ -50,9 +37,6 @@ export default class World extends Model<World> {
     name!: string;
 
     @Column(DataType.JSON)
-    player!: IPlayer;
-
-    @Column(DataType.JSON)
     settings!: ISettings;
 
     @Column(DataType.ARRAY(DataType.JSON))
@@ -60,6 +44,13 @@ export default class World extends Model<World> {
 
     @Column
     currentSceneId!: number;
+
+    @ForeignKey(() => Player)
+    @Column
+    playerId!: number;
+
+    @BelongsTo(() => Player)
+    player!: Player;
 
     @ForeignKey(() => User)
     @Column
