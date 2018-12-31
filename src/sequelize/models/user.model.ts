@@ -2,7 +2,7 @@ import { Model, Table, Column, DataType, Unique, PrimaryKey, AutoIncrement, HasM
 import World from './world.model';
 
 @Table({
-    tableName: 'users'
+    tableName: 'users',
 })
 export default class User extends Model<User> {
 

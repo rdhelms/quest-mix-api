@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 import SceneObject from '../../src/sequelize/models/object.model';
 
 describe('controllers | objects', function() {
@@ -8,11 +8,11 @@ describe('controllers | objects', function() {
         before(async function() {
             await SceneObject.create({
                 name: 'object1',
-                frames: []
+                frames: [],
             });
             await SceneObject.create({
                 name: 'object2',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<SceneObject[]>('http://localhost:3000/objects')).data;
         });
@@ -34,7 +34,7 @@ describe('controllers | objects', function() {
             response = (await axios.post<SceneObject>('http://localhost:3000/objects', {
                 id: '1234567890',
                 name: 'New SceneObject',
-                frames: []
+                frames: [],
             })).data;
         });
         it('returns new object with id 1', function() {
@@ -53,7 +53,7 @@ describe('controllers | objects', function() {
         before(async function() {
             await SceneObject.create({
                 name: 'Single SceneObject',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<SceneObject>('http://localhost:3000/objects/1')).data;
         });
@@ -70,10 +70,10 @@ describe('controllers | objects', function() {
         before(async function() {
             await SceneObject.create({
                 name: 'Original Name',
-                frames: []
+                frames: [],
             });
             response = (await axios.patch<SceneObject>('http://localhost:3000/objects/1', {
-                name: 'Modified Name'
+                name: 'Modified Name',
             })).data;
         });
         it('returns modified object with id of 1', function() {
@@ -93,7 +93,7 @@ describe('controllers | objects', function() {
         before(async function() {
             await SceneObject.create({
                 name: 'Test SceneObject',
-                frames: []
+                frames: [],
             });
             deleteResponse = (await axios.delete('http://localhost:3000/objects/1')).data as number;
             getResponse = (await axios.get<SceneObject[]>('http://localhost:3000/objects')).data;

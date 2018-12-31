@@ -12,7 +12,7 @@ export interface IPixel {
 export type TFrame = IPixel[][];
 
 @Table({
-    tableName: 'avatars'
+    tableName: 'avatars',
 })
 export default class Avatar extends Model<Avatar> {
     @AutoIncrement

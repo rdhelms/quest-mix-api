@@ -34,8 +34,8 @@ backgroundsController.route('/:id')
 
             const background = await Background.findOne({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
             res.json(background);
         } catch (err) {
@@ -51,9 +51,9 @@ backgroundsController.route('/:id')
 
             const result = await Background.update(req.body as Background, {
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {
@@ -75,8 +75,8 @@ backgroundsController.route('/:id')
 
             const result = await Background.destroy({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
 
             res.json(result);

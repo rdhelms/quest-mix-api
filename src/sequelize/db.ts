@@ -37,18 +37,18 @@ const operatorsAliases = {
   $any: Op.any,
   $all: Op.all,
   $values: Op.values,
-  $col: Op.col
+  $col: Op.col,
 };
 
 export const sequelize = new Sequelize({
     url: DATABASE_URL as string,
     dialect: 'postgres',
     dialectOptions: {
-        ssl: process.env.NODE_ENV === 'production'
+        ssl: process.env.NODE_ENV === 'production',
     },
     modelPaths: [`${__dirname}/models`],
     logging: false,
-    operatorsAliases
+    operatorsAliases,
 });
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {

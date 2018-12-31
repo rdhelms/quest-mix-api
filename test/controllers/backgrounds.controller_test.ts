@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 import Background from '../../src/sequelize/models/background.model';
 
 describe('controllers | backgrounds', function() {
@@ -8,11 +8,11 @@ describe('controllers | backgrounds', function() {
         before(async function() {
             await Background.create({
                 name: 'background1',
-                frames: []
+                frames: [],
             });
             await Background.create({
                 name: 'background2',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Background[]>('http://localhost:3000/backgrounds')).data;
         });
@@ -34,7 +34,7 @@ describe('controllers | backgrounds', function() {
             response = (await axios.post<Background>('http://localhost:3000/backgrounds', {
                 id: '1234567890',
                 name: 'New Background',
-                frames: []
+                frames: [],
             })).data;
         });
         it('returns new background with id 1', function() {
@@ -53,7 +53,7 @@ describe('controllers | backgrounds', function() {
         before(async function() {
             await Background.create({
                 name: 'Single Background',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Background>('http://localhost:3000/backgrounds/1')).data;
         });
@@ -70,10 +70,10 @@ describe('controllers | backgrounds', function() {
         before(async function() {
             await Background.create({
                 name: 'Original Name',
-                frames: []
+                frames: [],
             });
             response = (await axios.patch<Background>('http://localhost:3000/backgrounds/1', {
-                name: 'Modified Name'
+                name: 'Modified Name',
             })).data;
         });
         it('returns modified background with id of 1', function() {
@@ -93,7 +93,7 @@ describe('controllers | backgrounds', function() {
         before(async function() {
             await Background.create({
                 name: 'Test Background',
-                frames: []
+                frames: [],
             });
             deleteResponse = (await axios.delete('http://localhost:3000/backgrounds/1')).data as number;
             getResponse = (await axios.get<Background[]>('http://localhost:3000/backgrounds')).data;

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 import Entity from '../../src/sequelize/models/entity.model';
 
 describe('controllers | entities', function() {
@@ -8,11 +8,11 @@ describe('controllers | entities', function() {
         before(async function() {
             await Entity.create({
                 name: 'entity1',
-                frames: []
+                frames: [],
             });
             await Entity.create({
                 name: 'entity2',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Entity[]>('http://localhost:3000/entities')).data;
         });
@@ -34,7 +34,7 @@ describe('controllers | entities', function() {
             response = (await axios.post<Entity>('http://localhost:3000/entities', {
                 id: '1234567890',
                 name: 'New Entity',
-                frames: []
+                frames: [],
             })).data;
         });
         it('returns new entity with id 1', function() {
@@ -53,7 +53,7 @@ describe('controllers | entities', function() {
         before(async function() {
             await Entity.create({
                 name: 'Single Entity',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Entity>('http://localhost:3000/entities/1')).data;
         });
@@ -70,10 +70,10 @@ describe('controllers | entities', function() {
         before(async function() {
             await Entity.create({
                 name: 'Original Name',
-                frames: []
+                frames: [],
             });
             response = (await axios.patch<Entity>('http://localhost:3000/entities/1', {
-                name: 'Modified Name'
+                name: 'Modified Name',
             })).data;
         });
         it('returns modified entity with id of 1', function() {
@@ -93,7 +93,7 @@ describe('controllers | entities', function() {
         before(async function() {
             await Entity.create({
                 name: 'Test Entity',
-                frames: []
+                frames: [],
             });
             deleteResponse = (await axios.delete('http://localhost:3000/entities/1')).data as number;
             getResponse = (await axios.get<Entity[]>('http://localhost:3000/entities')).data;

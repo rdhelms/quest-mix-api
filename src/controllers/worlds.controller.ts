@@ -20,8 +20,8 @@ worldsController.route('/')
             const requestUser = req.user as { username: string };
             const user = await User.findOne({
                 where: {
-                    username: requestUser && requestUser.username
-                }
+                    username: requestUser && requestUser.username,
+                },
             });
             if (!user) {
                 throw new Error('Unauthorized');
@@ -46,12 +46,12 @@ worldsController.route('/:id')
             };
             const world = await World.findOne({
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
                 include: [
                     { model: Player, include: [ Avatar ] },
-                    { model: User }
-                ]
+                    { model: User },
+                ],
             });
             res.json(world);
         } catch (err) {

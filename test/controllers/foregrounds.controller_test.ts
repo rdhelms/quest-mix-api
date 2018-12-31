@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 import Foreground from '../../src/sequelize/models/foreground.model';
 
 describe('controllers | foregrounds', function() {
@@ -8,11 +8,11 @@ describe('controllers | foregrounds', function() {
         before(async function() {
             await Foreground.create({
                 name: 'foreground1',
-                frames: []
+                frames: [],
             });
             await Foreground.create({
                 name: 'foreground2',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Foreground[]>('http://localhost:3000/foregrounds')).data;
         });
@@ -34,7 +34,7 @@ describe('controllers | foregrounds', function() {
             response = (await axios.post<Foreground>('http://localhost:3000/foregrounds', {
                 id: '1234567890',
                 name: 'New Foreground',
-                frames: []
+                frames: [],
             })).data;
         });
         it('returns new foreground with id 1', function() {
@@ -53,7 +53,7 @@ describe('controllers | foregrounds', function() {
         before(async function() {
             await Foreground.create({
                 name: 'Single Foreground',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Foreground>('http://localhost:3000/foregrounds/1')).data;
         });
@@ -70,10 +70,10 @@ describe('controllers | foregrounds', function() {
         before(async function() {
             await Foreground.create({
                 name: 'Original Name',
-                frames: []
+                frames: [],
             });
             response = (await axios.patch<Foreground>('http://localhost:3000/foregrounds/1', {
-                name: 'Modified Name'
+                name: 'Modified Name',
             })).data;
         });
         it('returns modified foreground with id of 1', function() {
@@ -93,7 +93,7 @@ describe('controllers | foregrounds', function() {
         before(async function() {
             await Foreground.create({
                 name: 'Test Foreground',
-                frames: []
+                frames: [],
             });
             deleteResponse = (await axios.delete('http://localhost:3000/foregrounds/1')).data as number;
             getResponse = (await axios.get<Foreground[]>('http://localhost:3000/foregrounds')).data;

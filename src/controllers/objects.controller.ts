@@ -34,8 +34,8 @@ objectsController.route('/:id')
 
             const sceneObject = await SceneObject.findOne({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
             res.json(sceneObject);
         } catch (err) {
@@ -51,9 +51,9 @@ objectsController.route('/:id')
 
             const result = await SceneObject.update(req.body as SceneObject, {
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {
@@ -75,8 +75,8 @@ objectsController.route('/:id')
 
             const result = await SceneObject.destroy({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
 
             res.json(result);

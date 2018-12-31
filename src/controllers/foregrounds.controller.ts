@@ -34,8 +34,8 @@ foregroundsController.route('/:id')
 
             const foreground = await Foreground.findOne({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
             res.json(foreground);
         } catch (err) {
@@ -51,9 +51,9 @@ foregroundsController.route('/:id')
 
             const result = await Foreground.update(req.body as Foreground, {
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {
@@ -75,8 +75,8 @@ foregroundsController.route('/:id')
 
             const result = await Foreground.destroy({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
 
             res.json(result);

@@ -33,8 +33,8 @@ playersController.route('/:id')
 
             const player = await Player.findOne({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
             res.json(player);
         } catch (err) {
@@ -50,9 +50,9 @@ playersController.route('/:id')
 
             const result = await Player.update(req.body as Player, {
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {
@@ -74,8 +74,8 @@ playersController.route('/:id')
 
             const result = await Player.destroy({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
 
             res.json(result);

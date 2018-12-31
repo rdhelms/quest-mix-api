@@ -15,7 +15,7 @@ server = app.listen(port, async () => {
     // Need to make sure tests don't run until db is finished sync-ing
     await sequelize.authenticate();
     await sequelize.sync({
-        force: true
+        force: true,
     });
     run();
 });
@@ -31,7 +31,7 @@ server.once('connection', (socket) => {
 
 beforeEach(async function() {
     const result = await sequelize.sync({
-        force: true
+        force: true,
     });
     return result;
 });

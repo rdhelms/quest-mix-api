@@ -6,8 +6,8 @@ const localStrategy = new LocalStrategy(async (username, password, done) => {
     try {
         const user = await User.findOne({
             where: {
-                username
-            }
+                username,
+            },
         });
 
         if (!user) {

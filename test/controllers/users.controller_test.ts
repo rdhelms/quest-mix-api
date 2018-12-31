@@ -20,7 +20,7 @@ describe('controllers | users', function() {
         before(async function() {
             response = (await axios.post<User>('http://localhost:3000/users', {
                 username: 'bobross',
-                password: 'paints'
+                password: 'paints',
             })).data;
         });
         it('returns user object with username', function() {
@@ -52,8 +52,8 @@ describe('controllers | users', function() {
                 password: 'pass1',
                 newInfo: {
                     provider: 'self',
-                    password: 'newPassword'
-                }
+                    password: 'newPassword',
+                },
             })).data;
         });
         it('returns user with new provider value', function() {
@@ -75,8 +75,8 @@ describe('controllers | users', function() {
                     username: 'user2',
                     password: 'pass2',
                     newInfo: {
-                        provider: 'self'
-                    }
+                        provider: 'self',
+                    },
                 }));
             } catch (e) {
                 response = (<AxiosError>e).response!;

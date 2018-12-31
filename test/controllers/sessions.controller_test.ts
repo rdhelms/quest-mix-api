@@ -14,13 +14,13 @@ describe('controllers | sessions', function() {
             const password = await bcrypt.hash('paints', 10);
             bobross = await User.create({
                 username,
-                password
+                password,
             });
 
             // Login as test user (create session)
             response = (await axios.post<unknown>('http://localhost:3000/sessions', {
                 username: 'bobross',
-                password: 'paints'
+                password: 'paints',
             }));
 
             cookie = (response.headers as {'set-cookie': string[]})['set-cookie'][0].split(';')[0];
@@ -43,13 +43,13 @@ describe('controllers | sessions', function() {
             const password = await bcrypt.hash('paints', 10);
             bobross = await User.create({
                 username,
-                password
+                password,
             });
 
             // Login as test user (create session)
             response = (await axios.post<unknown>('http://localhost:3000/sessions', {
                 username: 'bobross',
-                password: 'paints'
+                password: 'paints',
             }));
 
             cookie = (response.headers as {'set-cookie': string[]})['set-cookie'][0].split(';')[0];
@@ -57,11 +57,11 @@ describe('controllers | sessions', function() {
             // Login again, with cookie
             response = (await axios.post<unknown>('http://localhost:3000/sessions', {
                 username: 'bobross',
-                password: 'paints'
+                password: 'paints',
             }, {
                 headers: {
-                    Cookie: cookie
-                }
+                    Cookie: cookie,
+                },
             }));
         });
         it('returns user object', function() {
@@ -75,7 +75,7 @@ describe('controllers | sessions', function() {
             try {
                 await axios.post<unknown>('http://localhost:3000/sessions', {
                     username: 'notreal',
-                    password: 'notreal'
+                    password: 'notreal',
                 });
             } catch (e) {
                 response = (<AxiosError>e).response!;
@@ -93,13 +93,13 @@ describe('controllers | sessions', function() {
             const password = await bcrypt.hash('paints', 10);
             await User.create({
                 username,
-                password
+                password,
             });
 
             try {
                 await axios.post<unknown>('http://localhost:3000/sessions', {
                     username,
-                    password: 'badpassword'
+                    password: 'badpassword',
                 });
             } catch (e) {
                 response = (<AxiosError>e).response!;

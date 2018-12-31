@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
 import Avatar from '../../src/sequelize/models/avatar.model';
 
 describe('controllers | avatars', function() {
@@ -8,11 +8,11 @@ describe('controllers | avatars', function() {
         before(async function() {
             await Avatar.create({
                 name: 'avatar1',
-                frames: []
+                frames: [],
             });
             await Avatar.create({
                 name: 'avatar2',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Avatar[]>('http://localhost:3000/avatars')).data;
         });
@@ -34,7 +34,7 @@ describe('controllers | avatars', function() {
             response = (await axios.post<Avatar>('http://localhost:3000/avatars', {
                 id: '1234567890',
                 name: 'New Avatar',
-                frames: []
+                frames: [],
             })).data;
         });
         it('returns new avatar with id 1', function() {
@@ -53,7 +53,7 @@ describe('controllers | avatars', function() {
         before(async function() {
             await Avatar.create({
                 name: 'Single Avatar',
-                frames: []
+                frames: [],
             });
             response = (await axios.get<Avatar>('http://localhost:3000/avatars/1')).data;
         });
@@ -70,10 +70,10 @@ describe('controllers | avatars', function() {
         before(async function() {
             await Avatar.create({
                 name: 'Original Name',
-                frames: []
+                frames: [],
             });
             response = (await axios.patch<Avatar>('http://localhost:3000/avatars/1', {
-                name: 'Modified Name'
+                name: 'Modified Name',
             })).data;
         });
         it('returns modified avatar with id of 1', function() {
@@ -93,7 +93,7 @@ describe('controllers | avatars', function() {
         before(async function() {
             await Avatar.create({
                 name: 'Test Avatar',
-                frames: []
+                frames: [],
             });
             deleteResponse = (await axios.delete('http://localhost:3000/avatars/1')).data as number;
             getResponse = (await axios.get<Avatar[]>('http://localhost:3000/avatars')).data;

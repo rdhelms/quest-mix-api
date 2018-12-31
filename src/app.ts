@@ -23,7 +23,7 @@ const app = express();
 
 // CORS middleware
 app.use(cors({
-    origin: true // reflects request origin
+    origin: true, // reflects request origin
 }));
 
 // Cookie middleware
@@ -33,24 +33,24 @@ app.use(cookieParser());
 const SequelizeStore = ConnectSessionSequelize<session.Store>(session.Store);
 const storeInstance = new SequelizeStore({
     db: sequelize,
-    table: 'Session'
+    table: 'Session',
 });
 app.use(session({
     secret: process.env.COOKIE_SECRET || 'keyboard cat',
     store: storeInstance,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
 }));
 
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ 
     extended: false,
-    limit: '50mb'
+    limit: '50mb',
 }));
 // Parse application/json
 app.use(bodyParser.json({
-    limit: '50mb'
+    limit: '50mb',
 }));
 
 // Authentication middleware
@@ -63,8 +63,8 @@ passport.deserializeUser(async (id, done) => {
     try {
         const user = await User.findOne({
             where: {
-                id
-            }
+                id,
+            },
         });
         if (user) {
             done(null, user);

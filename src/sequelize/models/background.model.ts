@@ -12,7 +12,7 @@ export interface IPixel {
 export type TFrame = IPixel[][];
 
 @Table({
-    tableName: 'backgrounds'
+    tableName: 'backgrounds',
 })
 export default class Background extends Model<Background> {
     @AutoIncrement

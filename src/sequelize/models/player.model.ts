@@ -15,7 +15,7 @@ export interface IPlayerSize {
 }
 
 @Table({
-    tableName: 'players'
+    tableName: 'players',
 })
 export default class Player extends Model<Player> {
     @AutoIncrement

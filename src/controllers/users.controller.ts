@@ -41,8 +41,8 @@ usersController.route('/:id')
 
             const user = await User.findOne({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
 
             res.json(user);
@@ -60,8 +60,8 @@ usersController.route('/:id')
 
             const currentUser = await User.findOne({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
 
             const body = req.body as {
@@ -82,9 +82,9 @@ usersController.route('/:id')
 
             const result = await User.update(newInfo, {
                 where: {
-                    id
+                    id,
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {

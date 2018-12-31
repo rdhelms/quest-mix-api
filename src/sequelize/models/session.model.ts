@@ -13,7 +13,7 @@ export interface ISess {
 }
 
 @Table({
-    tableName: 'sessions'
+    tableName: 'sessions',
 })
 export default class Session extends Model<Session> {
 

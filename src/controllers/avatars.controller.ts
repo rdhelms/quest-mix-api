@@ -33,8 +33,8 @@ avatarsController.route('/:id')
 
             const avatar = await Avatar.findOne({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
             res.json(avatar);
         } catch (err) {
@@ -50,9 +50,9 @@ avatarsController.route('/:id')
 
             const result = await Avatar.update(req.body as Avatar, {
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {
@@ -74,8 +74,8 @@ avatarsController.route('/:id')
 
             const result = await Avatar.destroy({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
 
             res.json(result);

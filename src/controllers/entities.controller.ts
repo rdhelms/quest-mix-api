@@ -33,8 +33,8 @@ entitiesController.route('/:id')
 
             const entity = await Entity.findOne({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
             res.json(entity);
         } catch (err) {
@@ -50,9 +50,9 @@ entitiesController.route('/:id')
 
             const result = await Entity.update(req.body as Entity, {
                 where: {
-                    id: Number(id)
+                    id: Number(id),
                 },
-                returning: true
+                returning: true,
             });
 
             if (result[0] > 0) {
@@ -74,8 +74,8 @@ entitiesController.route('/:id')
 
             const result = await Entity.destroy({
                 where: {
-                    id: Number(id)
-                }
+                    id: Number(id),
+                },
             });
 
             res.json(result);

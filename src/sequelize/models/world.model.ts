@@ -24,7 +24,7 @@ export interface IScene {
 }
 
 @Table({
-    tableName: 'worlds'
+    tableName: 'worlds',
 })
 export default class World extends Model<World> {
 
