@@ -14,12 +14,13 @@
     "reporter": "lcov"
   },
   "scripts": {
-    "start": "npm run lint && node -r dotenv/config dist/src/app.js",
+    "start": "node -r dotenv/config dist/src/app.js",
     "restart": "npm run clean && npm run build-watch",
     "build": "tsc",
     "build-clean": "npm run clean && npm run build",
     "clean": "del-cli dist",
-    "build-watch": "tsc-watch --onSuccess 'npm start'",
+    "build-watch": "tsc-watch --onSuccess 'npm run lint-and-start'",
+    "lint-and-start": "npm run lint && npm start",
     "lint": "npm run tslint -s || true",
     "tslint": "echo 'Linting...' && tslint --project tsconfig.json --config tslint.json --format stylish && echo 'All files pass linting.'",
     "test": "npm run build-clean && npm run lint && cross-env NODE_ENV=test mocha --recursive dist/test --delay -r dotenv/config",
