@@ -27,18 +27,20 @@ describe('controllers | worlds', function() {
         });
     });
     describe('Unauthorized POST to /worlds', function() {
+        let errorMessage: string;
         async function createWorld() {
             return (await axios.post<World>('http://localhost:3000/worlds', {
                 name: 'New World',
             })).data;
         }
-        it('returns an error', async function() {
-            let errorMessage;
+        before(async function() {
             try {
                 await createWorld();
             } catch (err) {
                 errorMessage = (err as Error).message;
             }
+        });
+        it('returns an error', function() {
             expect(errorMessage).to.equal('Request failed with status code 401');
         });
     });
