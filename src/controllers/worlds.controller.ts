@@ -15,7 +15,8 @@ worldsController.route('/')
             /* istanbul ignore next */
             res.status(500).send(`${(<Error>err).name}: ${(<Error>err).message}`);
         }
-    }).post(async (req, res) => {
+    })
+    .post(async (req, res) => {
         try {
             const requestUser = req.user as { username: string };
             const user = await User.findOne({
@@ -54,6 +55,40 @@ worldsController.route('/:id')
                 ],
             });
             res.json(world);
+        } catch (err) {
+            /* istanbul ignore next */
+            res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
+        }
+    })
+    .patch(async (req, res) => {
+        try {
+            const requestUser = req.user as { username: string };
+            const user = await User.findOne({
+                where: {
+                    username: requestUser && requestUser.username,
+                },
+            });
+            if (!user) {
+                throw new Error('Unauthorized');
+            }
+
+            const { id } = req.params as {
+                id: string;
+            };
+
+            const result = await World.update(req.body as World, {
+                where: {
+                    id: Number(id),
+                },
+                returning: true,
+            });
+
+            if (result[0] > 0) {
+                res.json(result[1][0]);
+            } else {
+                /* istanbul ignore next */
+                res.status(400).json(result);
+            }
         } catch (err) {
             /* istanbul ignore next */
             res.status(401).send(`${(<Error>err).name}: ${(<Error>err).message}`);
