@@ -1,5 +1,10 @@
 import { Model, Table, Column, DataType, Unique, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
 import World from './world.model';
+import Avatar from './avatar.model';
+import Background from './background.model';
+import Foreground from './foreground.model';
+import SceneObject from './object.model';
+import Entity from './entity.model';
 
 @Table({
     tableName: 'users',
@@ -41,4 +46,19 @@ export default class User extends Model<User> {
 
     @HasMany(() => World)
     worlds!: World[];
+
+    @HasMany(() => Avatar)
+    avatars!: Avatar[];
+
+    @HasMany(() => Background)
+    backgrounds!: Background[];
+
+    @HasMany(() => Foreground)
+    foregrounds!: Foreground[];
+
+    @HasMany(() => Entity)
+    entities!: Entity[];
+
+    @HasMany(() => SceneObject)
+    sceneObjects!: SceneObject[];
 }

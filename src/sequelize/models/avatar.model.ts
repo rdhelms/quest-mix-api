@@ -1,4 +1,6 @@
-import { Model, AutoIncrement, PrimaryKey, Column, DataType, Table } from 'sequelize-typescript';
+import { Model, AutoIncrement, PrimaryKey, Column, DataType, Table, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
+import User from './user.model';
+import Player from './player.model';
 
 export interface IPixel {
     pos: {
@@ -25,4 +27,14 @@ export default class Avatar extends Model<Avatar> {
 
     @Column(DataType.ARRAY(DataType.JSON))
     frames!: TFrame[];
+
+    @HasMany(() => Player)
+    players!: Player[];
+
+    @ForeignKey(() => User)
+    @Column
+    ownerId!: number;
+
+    @BelongsTo(() => User)
+    owner!: User;
 }

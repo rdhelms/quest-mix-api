@@ -50,6 +50,7 @@ export const sequelize = new Sequelize({
     logging: false,
     operatorsAliases,
 });
+
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
     sequelize.authenticate();

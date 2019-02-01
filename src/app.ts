@@ -3,7 +3,6 @@ import session from 'express-session';
 import ConnectSessionSequelize from 'connect-session-sequelize';
 import { sequelize } from './sequelize/db';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import { localStrategy } from './passports/local.passport';
@@ -24,10 +23,8 @@ const app = express();
 // CORS middleware
 app.use(cors({
     origin: true, // reflects request origin
+    credentials: true,
 }));
-
-// Cookie middleware
-app.use(cookieParser());
 
 // Session middleware
 const SequelizeStore = ConnectSessionSequelize<session.Store>(session.Store);

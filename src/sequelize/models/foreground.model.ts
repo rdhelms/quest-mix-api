@@ -1,4 +1,5 @@
-import { Model, AutoIncrement, PrimaryKey, Column, DataType, Table } from 'sequelize-typescript';
+import { Model, AutoIncrement, PrimaryKey, Column, DataType, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import User from './user.model';
 
 export interface IPixel {
     pos: {
@@ -25,4 +26,11 @@ export default class Foreground extends Model<Foreground> {
 
     @Column(DataType.ARRAY(DataType.JSON))
     frames!: TFrame[];
+
+    @ForeignKey(() => User)
+    @Column
+    ownerId!: number;
+
+    @BelongsTo(() => User)
+    owner!: User;
 }
