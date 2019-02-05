@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import World from '../../src/sequelize/models/world.model';
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import bcrypt from 'bcryptjs';
 import User from '../../src/sequelize/models/user.model';
 
@@ -79,7 +79,7 @@ describe('controllers | worlds', function() {
             expect(response.ownerId).to.equal(1);
         });
     });
-    describe('GET to /worlds/:id', function () {
+    describe('GET to /worlds/:id', function() {
         let response: World;
         before(async function() {
             await World.create({
@@ -89,6 +89,59 @@ describe('controllers | worlds', function() {
         });
         it('returns world with id of 1', function () {
             expect(response.id).to.equal(1);
+        });
+    });
+    describe('Unauthorized PATCH to /worlds/:id', function() {
+        let response: AxiosResponse<unknown>;
+        before(async function() {
+            await World.create({
+                name: 'World 1',
+            });
+            try {
+                (await axios.patch<World>('http://localhost:3000/worlds/1', {
+                    name: 'New World Awesomeness',
+                })).data;
+            } catch (err) {
+                response = (<AxiosError>err).response!;
+            }
+        });
+        it('returns 401', function() {
+            expect(response.status).to.equal(401);
+        });
+    });
+    describe('PATCH to /worlds/:id', function() {
+        let response: AxiosResponse<World>;
+        before(async function() {
+            // Login as test user (create session)
+            const username = 'bobross';
+            const password = await bcrypt.hash('paints', 10);
+            await User.create({
+                username,
+                password,
+            });
+            const session = (await axios.post<unknown>('http://localhost:3000/sessions', {
+                username: 'bobross',
+                password: 'paints',
+            }));
+            const cookie = (session.headers as {'set-cookie': string[]})['set-cookie'][0].split(';')[0];
+
+            await World.create({
+                name: 'World 1',
+            });
+
+            response = (await axios.patch<World>('http://localhost:3000/worlds/1', {
+                name: 'New World Awesomeness',
+            }, {
+                headers: {
+                    Cookie: cookie,
+                },
+            }));
+        });
+        it('returns 200', function() {
+            expect(response.status).to.equal(200);
+        });
+        it('returns updated world', function() {
+            expect(response.data.name).to.equal('New World Awesomeness');
         });
     });
 });

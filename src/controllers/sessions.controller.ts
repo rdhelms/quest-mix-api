@@ -8,7 +8,6 @@ sessionsController.route('/')
             if (req.user) {
                 res.json(req.user);
             } else {
-                /* istanbul ignore next */
                 res.status(401).send(`Unauthorized`);
             }
         } catch (err) {
@@ -20,7 +19,7 @@ sessionsController.route('/')
         res.json(req.user);
     })
     .delete((req, res) => {
-        if (req.session) {
+        if (req.session && req.session.passport) {
             req.session.destroy((err) => {
                 if (err) {
                     /* istanbul ignore next */

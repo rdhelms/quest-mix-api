@@ -16,7 +16,8 @@
             "port": 9229,
             "envFile": "${workspaceFolder}/.env",
             "outFiles": [ "${workspaceFolder}/dist/**/*.js" ],
-            "smartStep": true
+            "smartStep": true,
+            "timeout": 30000
         },
         {
             "type": "node",
