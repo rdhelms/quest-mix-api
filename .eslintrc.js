@@ -23,5 +23,12 @@ module.exports = {
         'space-infix-ops': [ 'error', { 'int32Hint': true }],
         'prefer-const': 'error',
         'no-shadow': 'error',
+        'no-unused-vars': 'off', // We use @typescript-eslint/no-unused-vars instead
+        '@typescript-eslint/member-delimiter-style': [ 'error', { 'multiline': { delimiter: 'none' } }],
+        '@typescript-eslint/interface-name-prefix': [ 'error', 'always' ],
+        '@typescript-eslint/no-angle-bracket-type-assertion': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/explicit-member-accessibility': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
     }
 }
