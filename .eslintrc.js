@@ -3,12 +3,12 @@ module.exports = {
     env: {
         node: true,
     },
-    globals: {
-        InlineEditor: 'readonly',
-    },
     extends: [
-        'eslint:recommended'
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
     ],
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
     rules: {
         'quotes': [ 'error', 'single' ],
         'comma-dangle': [ 'error', 'always-multiline' ],
