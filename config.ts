@@ -11,7 +11,7 @@ const mountPath      = optional('PARSE_MOUNT', '/api'),
     serverUrl        = optional('SERVER_URL', rootUrl + mountPath),
     publicServerUrl  = optional('PUBLIC_SERVER_URL', serverUrl)
 
-export default {
+const config = {
     APP_ID:                  required('APP_ID'),
     APPLICATION_NAME:        optional('APPLICATION_NAME', 'Parse Server'),
     CLOUD_CODE_MAIN:         optional('CLOUD_CODE_MAIN', './cloud/main.ts'),
@@ -28,5 +28,7 @@ export default {
     PUSH:                    optional('PUSH', false),
     ROOT_URL:                rootUrl,
     SERVER_URL:              serverUrl,
-    WORKERS:                 optional('WEB_CONCURRENCY', 1),
+    WORKERS:                 optional('WORKERS', 1),
 }
+
+export default config

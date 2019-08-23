@@ -1,4 +1,5 @@
 import config from './config'
+import * as throng from 'throng'
 import * as dashboard from 'parse-dashboard'
 import * as express from 'express'
 import * as path from 'path'
@@ -28,4 +29,8 @@ const start = () => {
     app.listen(config.PORT, displayEnvironment)
 }
 
-start()
+// Setup NODE Clustering via Throng package
+throng({
+    workers: config.WORKERS,
+    lifetime: Infinity
+}, start)
