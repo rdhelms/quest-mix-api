@@ -3,6 +3,9 @@
 
 .DS_Store
 
+# Parse creates Log files if it crashes
+logs
+
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
