@@ -1,0 +1,11 @@
+# Local environment should be stored in .env file and NEVER checked in
+.env
+
+.DS_Store
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+# Emacs
+*~
