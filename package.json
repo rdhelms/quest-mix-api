@@ -12,15 +12,17 @@
         "dotenv": "8.1.0",
         "express": "4.17.1",
         "parse-dashboard": "1.4.3",
-        "parse-server": "3.7.2",
+        "parse-server": "3.8.0",
         "throng": "4.0.0",
         "ts-node": "8.3.0",
         "typescript": "3.5.3"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "2.0.0",
-        "@typescript-eslint/parser": "2.0.0",
-        "eslint": "6.2.1"
+        "@types/parse": "2.2.8",
+        "@types/throng": "4.0.2",
+        "@typescript-eslint/eslint-plugin": "2.1.0",
+        "@typescript-eslint/parser": "2.1.0",
+        "eslint": "6.3.0"
     },
     "scripts": {
         "lint": "eslint '**/*.ts'",
