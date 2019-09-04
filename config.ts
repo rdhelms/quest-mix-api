@@ -1,8 +1,9 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
 // NOTE: Two helper functions for specifying env variables and defaults
-const optional = (name, fallback): string => process.env[name] || fallback,
-    required = (name): string => process.env[name] ||
+const optional = (name: string, fallback: string | number | boolean): string => process.env[name] || String(fallback),
+    required = (name: string): string => process.env[name] ||
     (console.error('Missing required env var: ' + name), process.exit(1)) // eslint-disable-line no-console
 
 const mountPath      = optional('PARSE_MOUNT', '/api'),

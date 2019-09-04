@@ -1,4 +1,6 @@
 import config from './config'
+// eslint-disable-next-line
+// @ts-ignore
 import { ParseServer } from 'parse-server'
 
 interface IParseOptions {

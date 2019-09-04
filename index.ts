@@ -1,13 +1,17 @@
 import config from './config'
 import throng from 'throng'
-import * as dashboard from 'parse-dashboard'
-import * as express from 'express'
-import * as path from 'path'
+// eslint-disable-next-line
+// @ts-ignore
+import dashboard from 'parse-dashboard'
+import express from 'express'
+import path from 'path'
 import parseServer from './custom-parse-server'
-import { dashboardConfig,
-        dashboardOptions,
-        displayEnvironment,
-        requireHTTPS } from './express-utils'
+import {
+    dashboardConfig,
+    dashboardOptions,
+    displayEnvironment,
+    requireHTTPS,
+} from './express-utils'
 
 const start = () => {
 
