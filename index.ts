@@ -1,7 +1,5 @@
 import config from './config'
 import throng from 'throng'
-// eslint-disable-next-line
-// @ts-ignore
 import dashboard from 'parse-dashboard'
 import express from 'express'
 import path from 'path'

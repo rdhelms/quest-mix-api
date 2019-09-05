@@ -27,15 +27,16 @@ const displayEnvironment = () => {
     // Display all environmental variables on start.
     console.log('-------- Environmental Variables: ---------------------') // eslint-disable-line no-console
     for (const key in config) {
-        if (typeof config[key as keyof typeof config] === 'string') {
+        const configValue = config[key as keyof typeof config]
+        if (typeof configValue === 'string') {
             // Redact most of the value of anything with KEY or SECRET in the key
             const value = (key.includes('KEY')
                            || key.includes('SECRET')
                            || key.includes('TOKEN')
                            || key.includes('DATABASE')
                            || key.includes('PASSWORD'))
-                ? '****** Redacted *****' + config[key as keyof typeof config].slice(-6)
-                : config[key as keyof typeof config]
+                ? '****** Redacted *****' + configValue.slice(-6)
+                : configValue
             console.log(key + ' : ' + value) // eslint-disable-line no-console
         }
     }
