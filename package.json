@@ -18,7 +18,7 @@
         "typescript": "3.6.3"
     },
     "devDependencies": {
-        "@types/dotenv": "^6.1.1",
+        "@types/dotenv": "6.1.1",
         "@types/parse": "2.2.9",
         "@types/throng": "4.0.2",
         "@typescript-eslint/eslint-plugin": "2.3.0",
