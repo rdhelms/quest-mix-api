@@ -3,31 +3,32 @@
     "version": "0.1.0",
     "description": "Parse Server using Typescript",
     "main": "index.ts",
-    "private": false,
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/Pocket-Prep/parse-server-typescript.git"
     },
     "dependencies": {
-        "dotenv": "8.1.0",
+        "dotenv": "8.2.0",
         "express": "4.17.1",
         "parse-dashboard": "2.0.3",
         "parse-server": "3.9.0",
-        "throng": "4.0.0",
-        "ts-node": "8.4.1",
-        "typescript": "3.6.3"
+        "throng": "4.0.0"
     },
     "devDependencies": {
         "@types/dotenv": "6.1.1",
-        "@types/parse": "2.2.9",
+        "@types/parse": "2.2.13",
         "@types/throng": "4.0.2",
-        "@typescript-eslint/eslint-plugin": "2.3.0",
-        "@typescript-eslint/parser": "2.3.0",
-        "eslint": "6.4.0"
+        "@typescript-eslint/eslint-plugin": "2.4.0",
+        "@typescript-eslint/parser": "2.4.0",
+        "typescript": "3.6.4",
+        "eslint": "6.5.1"
     },
     "scripts": {
+        "dev": "npm run build && npm start",
         "lint": "eslint '**/*.ts'",
-        "start": "ts-node index.ts"
+        "build": "tsc -p .",
+        "start": "node dist/index.js"
     },
     "engines": {
         "node": "10.15.3",

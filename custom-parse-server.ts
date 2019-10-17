@@ -25,7 +25,7 @@ export default {
         return new ParseServer({
             appId: overrides.appId || config.APP_ID,
             appName: overrides.appName || config.APPLICATION_NAME,
-            cloud: overrides.cloud || config.CLOUD_CODE_MAIN,
+            cloud: `./dist/${overrides.cloud || config.CLOUD_CODE_MAIN}`,
             cluster: overrides.cluster || config.WORKERS,
             databaseOptions: {
                 reconnectInterval: 1500,

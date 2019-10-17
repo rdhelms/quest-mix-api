@@ -1,3 +1,6 @@
+# Compiled JS
+dist
+
 # Local environment should be stored in .env file and NEVER checked in
 .env
 
