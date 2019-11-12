@@ -11,27 +11,37 @@
     "dependencies": {
         "dotenv": "8.2.0",
         "express": "4.17.1",
-        "parse-dashboard": "2.0.3",
+        "parse-dashboard": "2.0.5",
         "parse-server": "3.9.0",
         "throng": "4.0.0"
     },
     "devDependencies": {
-        "@types/dotenv": "6.1.1",
-        "@types/parse": "2.2.13",
+        "@types/node": "12.12.7",
+        "@types/jest": "24.0.22",
+        "@types/parse": "2.2.15",
         "@types/throng": "4.0.2",
-        "@typescript-eslint/eslint-plugin": "2.4.0",
-        "@typescript-eslint/parser": "2.4.0",
-        "typescript": "3.6.4",
-        "eslint": "6.5.1"
+        "@typescript-eslint/eslint-plugin": "2.7.0",
+        "@typescript-eslint/parser": "2.7.0",
+        "babel-eslint": "10.0.3",
+        "eslint": "6.6.0",
+        "eslint-plugin-import": "2.18.2",
+        "jest": "24.9.0",
+        "ts-jest": "24.1.0",
+        "typescript": "3.7.2",
+        "nyc": "14.1.1"
     },
     "scripts": {
         "dev": "npm run build && npm start",
         "lint": "eslint '**/*.ts'",
         "build": "tsc -p .",
-        "start": "node dist/index.js"
+        "start": "node dist/index.js",
+        "unit": "jest --config tests/unit/jest.config.js",
+        "integration": "PARSE_SILENT=true ./tests/run_integration_tests.sh",
+        "test": "npm run lint && npm run build && npm run unit && npm run integration",
+        "coverage": "nyc --silent npm run integration && nyc report"
     },
     "engines": {
-        "node": "10.15.3",
-        "npm": "6.4.1"
+        "node": "10.17.0",
+        "npm": "6.11.3"
     }
 }

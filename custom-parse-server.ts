@@ -20,6 +20,7 @@ export default {
         // NOTE: Allows custom options, useful for E2E testing
         const overrides = options || {},
         verbose = config.PARSE_LOG_VERBOSE || false,
+        silent = config.PARSE_SILENT || false,
         logLevel = (verbose) ? undefined : 'error'
 
         return new ParseServer({
@@ -40,7 +41,7 @@ export default {
             maxUploadSize: '5mb',
             publicServerURL: overrides.publicServerURL || config.PUBLIC_SERVER_URL,
             serverURL: overrides.serverURL || config.SERVER_URL,
-            silent: overrides.silent,
+            silent: overrides.silent || silent,
             verbose: overrides.verbose || verbose,
             allowClientClassCreation: false,
         })
