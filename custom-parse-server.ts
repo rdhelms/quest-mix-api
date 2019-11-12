@@ -19,9 +19,9 @@ export default {
     create: (options?: IParseOptions) => {
         // NOTE: Allows custom options, useful for E2E testing
         const overrides = options || {},
-        verbose = config.PARSE_LOG_VERBOSE || false,
-        silent = config.PARSE_SILENT || false,
-        logLevel = (verbose) ? undefined : 'error'
+            verbose = config.PARSE_LOG_VERBOSE || false,
+            silent = config.PARSE_SILENT || false,
+            logLevel = (verbose) ? undefined : 'error'
 
         return new ParseServer({
             appId: overrides.appId || config.APP_ID,
