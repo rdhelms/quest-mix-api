@@ -1,0 +1,24 @@
+# Environment files
+.env
+
+# Compiled JS
+dist
+
+# Local environment should be stored in .env file and NEVER checked in
+.env
+
+.DS_Store
+
+# Parse creates Log files if it crashes
+logs
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output
+
+# Emacs
+*~
