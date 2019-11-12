@@ -3,9 +3,9 @@ dotenv.config()
 
 // NOTE: Two helper functions for specifying env variables and defaults
 const optional = <T extends string | number | boolean>(
-    name: string,
-    fallback: T
-): string | T => process.env[name] || fallback,
+        name: string,
+        fallback: T
+    ): string | T => process.env[name] || fallback,
     required = (name: string): string => process.env[name] ||
     (console.error('Missing required env var: ' + name), process.exit(1)) // eslint-disable-line no-console
 
