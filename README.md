@@ -1,2 +1,2 @@
-# quest-mix-api
+# Quest Mix API
 Quest Mix API
