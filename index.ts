@@ -12,7 +12,7 @@ const appName = process.env.APP_NAME || 'Quest Mix API'
 const masterKey = process.env.MASTER_KEY
 const rootUrl = process.env.ROOT_URL || `http://localhost:${port}`
 const mountPath = process.env.MOUNT_PATH || '/api'
-const serverUrl = `${rootUrl}${mountPath}`
+const serverURL = `${rootUrl}${mountPath}`
 
 const start = () => {
     // Create our Express app and force HTTPS
@@ -38,7 +38,7 @@ const start = () => {
         masterKey,
         mountPath,
         port,
-        serverUrl,
+        serverURL,
     })
     app.use(mountPath, parseServer)
 
@@ -48,7 +48,7 @@ const start = () => {
             appId,
             appName,
             masterKey,
-            serverUrl,
+            serverURL,
         }],
         port,
         trustProxy: 1,
@@ -61,7 +61,7 @@ const start = () => {
 
     app.listen(port, () => {
         /* eslint-disable-next-line no-console */
-        console.log(`Started server at ${serverUrl}`)
+        console.log(`Started server at ${serverURL}`)
     })
 }
 
