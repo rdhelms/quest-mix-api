@@ -1,48 +1,37 @@
 {
-    "name": "parse-server-typescript",
+    "name": "quest-mix-api",
     "version": "0.1.0",
-    "description": "Parse Server using Typescript",
+    "description": "Quest Mix API",
     "main": "index.ts",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Pocket-Prep/parse-server-typescript.git"
+        "url": "https://github.com/rdhelms/quest-mix-api.git"
     },
     "dependencies": {
-        "dotenv": "8.2.0",
+        "dotenv": "10.0.0",
         "express": "4.17.1",
         "parse-dashboard": "2.1.0",
-        "parse-server": "4.2.0",
-        "throng": "4.0.0"
+        "parse-server": "4.5.0",
+        "throng": "5.0.0"
     },
     "devDependencies": {
-        "@types/node": "13.13.4",
-        "@types/jest": "25.2.1",
-        "@types/parse": "2.12.0",
-        "@types/throng": "4.0.2",
-        "@typescript-eslint/eslint-plugin": "2.29.0",
-        "@typescript-eslint/parser": "2.29.0",
-        "parse": "2.12.0",
-        "babel-eslint": "10.1.0",
-        "eslint": "6.8.0",
-        "eslint-plugin-import": "2.20.2",
-        "jest": "25.4.0",
-        "ts-jest": "25.4.0",
-        "typescript": "3.8.3",
-        "nyc": "15.0.1"
+        "@types/parse": "2.18.8",
+        "@types/throng": "5.0.1",
+        "@typescript-eslint/eslint-plugin": "4.28.4",
+        "@typescript-eslint/parser": "4.28.4",
+        "eslint": "7.31.0",
+        "parse": "3.3.0",
+        "typescript": "4.3.5"
     },
     "scripts": {
+        "build": "tsc -p .",
         "dev": "npm run build && npm start",
         "lint": "eslint '**/*.ts'",
-        "build": "tsc -p .",
-        "start": "node dist/index.js",
-        "unit": "jest --config tests/unit/jest.config.js",
-        "integration": "PARSE_SILENT=true ./tests/run_integration_tests.sh",
-        "test": "npm run lint && npm run build && npm run unit && npm run integration",
-        "coverage": "nyc --silent npm run integration && nyc report"
+        "start": "node dist/index.js"
     },
     "engines": {
-        "node": "10.17.0",
-        "npm": "6.11.3"
+        "node": "14.15.5",
+        "npm": "6.14.11"
     }
 }

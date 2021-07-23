@@ -1,3 +1,3 @@
-Parse.Cloud.define('threadTest', () => {
+Parse.Cloud.define('exampleCloudFunction', () => {
     return 'test'
 })

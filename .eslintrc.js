@@ -3,17 +3,16 @@ module.exports = {
     env: {
         node: true,
         es6: true,
-        jest: true
     },
     globals: {
-        Parse: 'readonly'
+        Parse: 'readonly',
     },
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
     ],
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
+    plugins: [ '@typescript-eslint' ],
     rules: {
         'quotes': [ 'error', 'single' ],
         'comma-dangle': [ 'error', 'always-multiline' ],
@@ -29,15 +28,24 @@ module.exports = {
         'eqeqeq': 'error',
         'prefer-const': 'error',
         'no-shadow': 'error',
-        'no-unused-vars': 'off', // We use @typescript-eslint/no-unused-vars instead
-        "indent": "off",    // There is a @typescript-eslint/indent instead
         'no-prototype-builtins': 'off',
-        '@typescript-eslint/indent': ['error', 4],
+        '@typescript-eslint/indent': [ 'error', 4 ],
         '@typescript-eslint/member-delimiter-style': [ 'error', { 'multiline': { delimiter: 'none' } }],
-        '@typescript-eslint/interface-name-prefix': [ 'error', 'always' ],
+        '@typescript-eslint/naming-convention': [
+            'error',
+            {
+                'selector': 'interface',
+                'format': [ 'PascalCase' ],
+                'custom': {
+                    'regex': '^I[A-Z]',
+                    'match': true,
+                },
+            },
+        ],
         '@typescript-eslint/no-angle-bracket-type-assertion': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/explicit-member-accessibility': 'off',
         '@typescript-eslint/no-use-before-define': 'error',
-    }
+    },
 }
