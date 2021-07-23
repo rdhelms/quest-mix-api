@@ -27,6 +27,8 @@ const start = () => {
             : next()
     })
 
+    app.use(express.static('public'))
+
     // Create the Parse Server
     const parseServer = new ParseServer({
         appId,
