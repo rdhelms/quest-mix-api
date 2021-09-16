@@ -1,15 +1,17 @@
-import ParseDashboard from 'parse-dashboard'
+// import ParseDashboard from 'parse-dashboard'
 import express, { NextFunction, Request, Response } from 'express'
-import { ParseServer } from 'parse-server'
+// import { ParseServer } from 'parse-server'
 import throng from 'throng'
 import dotenv from 'dotenv'
+import { createReadStream } from 'fs'
+import cors from 'cors'
 
 dotenv.config()
 
 const port = process.env.PORT || 5000
-const appId = process.env.APP_ID
-const appName = process.env.APP_NAME || 'Quest Mix API'
-const masterKey = process.env.MASTER_KEY
+// const appId = process.env.APP_ID
+// const appName = process.env.APP_NAME || 'Quest Mix API'
+// const masterKey = process.env.MASTER_KEY
 const rootUrl = process.env.ROOT_URL || `http://localhost:${port}`
 const mountPath = process.env.MOUNT_PATH || '/api'
 const serverURL = `${rootUrl}${mountPath}`
@@ -29,35 +31,46 @@ const start = () => {
 
     app.use(express.static('public'))
 
-    // Create the Parse Server
-    const parseServer = new ParseServer({
-        appId,
-        appName,
-        cloud: './dist/cloud/main.js',
-        databaseURI: process.env.DATABASE_URI || 'mongodb://localhost',
-        masterKey,
-        mountPath,
-        port,
-        serverURL,
+    // Mount streaming path
+    app.get('/stream', cors(), (req, res) => {
+        const readStream = createReadStream('./data.txt')
+        readStream.on('data', (data) => {
+            res.write(data)
+        })
+        readStream.on('end', () => {
+            res.status(200).send()
+        })
     })
-    app.use(mountPath, parseServer)
 
-    // Graft on the dashboard
-    const dashboard = new ParseDashboard({
-        apps: [{
-            appId,
-            appName,
-            masterKey,
-            serverURL,
-        }],
-        port,
-        trustProxy: 1,
-        users: [{
-            user: process.env.DASHBOARD_USERNAME,
-            pass: process.env.DASHBOARD_PASSWORD,
-        }],
-    })
-    app.use('/dashboard', dashboard)
+    // // Create the Parse Server
+    // const parseServer = new ParseServer({
+    //     appId,
+    //     appName,
+    //     cloud: './dist/cloud/main.js',
+    //     databaseURI: process.env.DATABASE_URI || 'mongodb://localhost',
+    //     masterKey,
+    //     mountPath,
+    //     port,
+    //     serverURL,
+    // })
+    // app.use(mountPath, parseServer)
+
+    // // Graft on the dashboard
+    // const dashboard = new ParseDashboard({
+    //     apps: [{
+    //         appId,
+    //         appName,
+    //         masterKey,
+    //         serverURL,
+    //     }],
+    //     port,
+    //     trustProxy: 1,
+    //     users: [{
+    //         user: process.env.DASHBOARD_USERNAME,
+    //         pass: process.env.DASHBOARD_PASSWORD,
+    //     }],
+    // })
+    // app.use('/dashboard', dashboard)
 
     app.listen(port, () => {
         /* eslint-disable-next-line no-console */
