@@ -19,19 +19,25 @@ app.use((req: Request, res: Response, next: NextFunction) => {
         ? res.redirect('https://' + req.get('host') + req.url)
         : next()
 })
+
+// CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
     next()
 })
 
+app.post('/backgrounds', (req, res) => {
+    return res.send('ok')
+})
+
 app.use(express.static('public'))
 
-// Streaming
-app.get('/stream', stream)
+// // Streaming
+// app.get('/stream', stream)
 
-// Backgrounds
-app.use(backgroundRouter)
+// // Backgrounds
+// app.use(backgroundRouter)
 
 app.listen(port, () => {
     /* eslint-disable-next-line no-console */
