@@ -26,10 +26,11 @@ const app = express()
 // CORS
 app.use(cors())
 
-app.use('/backgrounds', (req, res) => {
+app.use('/backgrounds', (req, res, next) => {
     res.send({
         message: 'ok',
     })
+    next()
 })
 
 // app.use(express.static('public'))

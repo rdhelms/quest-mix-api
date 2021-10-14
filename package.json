@@ -2,7 +2,7 @@
     "name": "quest-mix-api",
     "version": "0.1.0",
     "description": "Quest Mix API",
-    "main": "index.ts",
+    "main": "dist/index.js",
     "scripts": {
         "build": "tsc -p .",
         "dev": "npm run build && npm start",
