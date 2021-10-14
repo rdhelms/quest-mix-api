@@ -1,20 +1,14 @@
-// import ParseDashboard from 'parse-dashboard'
 import express, { NextFunction, Request, Response } from 'express'
-// import { ParseServer } from 'parse-server'
 import throng from 'throng'
 import dotenv from 'dotenv'
-import fs from 'fs'
 import cors from 'cors'
+import { stream } from './routes/stream'
+import * as backgrounds from './routes/backgrounds'
 
 dotenv.config()
 
 const port = process.env.PORT || 5000
-// const appId = process.env.APP_ID
-// const appName = process.env.APP_NAME || 'Quest Mix API'
-// const masterKey = process.env.MASTER_KEY
-const rootUrl = process.env.ROOT_URL || `http://localhost:${port}`
-const mountPath = process.env.MOUNT_PATH || '/api'
-const serverURL = `${rootUrl}${mountPath}`
+const serverURL = process.env.ROOT_URL || `http://localhost:${port}`
 
 const start = () => {
     // Create our Express app and force HTTPS
@@ -28,86 +22,15 @@ const start = () => {
             ? res.redirect('https://' + req.get('host') + req.url)
             : next()
     })
+    app.use(cors())
 
     app.use(express.static('public'))
 
-    // Mount streaming path
-    app.get('/stream', cors(), (req, res) => {
-        function readBytes (fd: number , sharedBuffer: Buffer) {
-            return new Promise((resolve, reject) => {
-                fs.read(
-                    fd, 
-                    sharedBuffer,
-                    0,
-                    sharedBuffer.length,
-                    null,
-                    (err) => {
-                        if (err) { return reject(err) }
-                        resolve(true)
-                    }
-                )
-            })
-        }
-        
-        async function* generateChunks (filePath: string, size: number) {
-            const sharedBuffer = Buffer.alloc(size)
-            const stats = fs.statSync(filePath) // file details
-            const fd = fs.openSync(filePath, 'r') // file descriptor
-            let bytesRead = 0 // how many bytes were read
-            let end = size 
-            
-            for (let i = 0; i < Math.ceil(stats.size / size); i++) {
-                await readBytes(fd, sharedBuffer)
-                bytesRead = (i + 1) * size
-                if (bytesRead > stats.size) {
-                    // When we reach the end of file, 
-                    // we have to calculate how many bytes were actually read
-                    end = size - (bytesRead - stats.size)
-                }
-                yield sharedBuffer.slice(0, end)
-            }
-        }
+    // Streaming
+    app.get('/stream', stream)
 
-        const CHUNK_SIZE = 10000000 // 10MB
-        async function main (filePath: string) {  
-            const chunks = generateChunks(filePath, CHUNK_SIZE)
-            for await (const chunk of chunks) {
-                res.write(chunk)
-            }
-        }
-
-        main('./50mb.txt')
-    })
-
-    // // Create the Parse Server
-    // const parseServer = new ParseServer({
-    //     appId,
-    //     appName,
-    //     cloud: './dist/cloud/main.js',
-    //     databaseURI: process.env.DATABASE_URI || 'mongodb://localhost',
-    //     masterKey,
-    //     mountPath,
-    //     port,
-    //     serverURL,
-    // })
-    // app.use(mountPath, parseServer)
-
-    // // Graft on the dashboard
-    // const dashboard = new ParseDashboard({
-    //     apps: [{
-    //         appId,
-    //         appName,
-    //         masterKey,
-    //         serverURL,
-    //     }],
-    //     port,
-    //     trustProxy: 1,
-    //     users: [{
-    //         user: process.env.DASHBOARD_USERNAME,
-    //         pass: process.env.DASHBOARD_PASSWORD,
-    //     }],
-    // })
-    // app.use('/dashboard', dashboard)
+    // Backgrounds
+    app.post('/backgrounds', backgrounds.create)
 
     app.listen(port, () => {
         /* eslint-disable-next-line no-console */
