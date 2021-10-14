@@ -30,7 +30,9 @@ app.use(cors({
 }))
 
 app.post('/backgrounds', (req, res) => {
-    return res.send('ok')
+    return res.json({
+        message: 'ok',
+    })
 })
 
 app.use(express.static('public'))
