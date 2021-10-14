@@ -26,6 +26,16 @@ const app = express()
 // CORS
 app.use(cors())
 
+// Parse application/x-www-form-urlencoded
+app.use(express.urlencoded({
+    extended: false,
+    limit: '50mb',
+}))
+// Parse application/json
+app.use(express.json({
+    limit: '50mb',
+}))
+
 app.use('/backgrounds', (req, res, next) => {
     res.send({
         message: 'ok',
