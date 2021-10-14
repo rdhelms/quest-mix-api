@@ -20,7 +20,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
         ? res.redirect('https://' + req.get('host') + req.url)
         : next()
 })
-app.use(cors())
+app.use(cors({
+    origin: process.env.CLIENT_ORIGIN,
+    credentials: true,
+}))
 
 app.use(express.static('public'))
 
