@@ -24,18 +24,15 @@ const app = express()
 // })
 
 // CORS
-app.options('*', (cors() as any))
-app.use(cors({
-    origin: true,
-}))
+app.use(cors())
 
-app.post('/backgrounds', (req, res) => {
-    return res.json({
+app.use('/backgrounds', (req, res) => {
+    res.send({
         message: 'ok',
     })
 })
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 // // Streaming
 // app.get('/stream', stream)
