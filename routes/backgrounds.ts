@@ -5,7 +5,7 @@ export const create: RequestHandler = (req, res) => {
     // TODO: Save the background to Mongo as a single large document
     // TODO: Save the background to Mongo as many small documents
 
-    res.send({
+    return res.send({
         function: 'create',
         status: 'ok',
     })
