@@ -1,6 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express'
 import dotenv from 'dotenv'
-import cors from 'cors'
 import { stream } from './routes/stream'
 import { backgroundRouter } from './routes/backgrounds'
 
@@ -20,10 +19,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
         ? res.redirect('https://' + req.get('host') + req.url)
         : next()
 })
-app.use(cors({
-    origin: process.env.CLIENT_ORIGIN,
-    credentials: true,
-}))
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    next()
+})
 
 app.use(express.static('public'))
 
@@ -37,4 +37,3 @@ app.listen(port, () => {
     /* eslint-disable-next-line no-console */
     console.log(`Started server at ${serverURL}`)
 })
-// }
