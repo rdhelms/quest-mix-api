@@ -24,7 +24,10 @@ const app = express()
 // })
 
 // CORS
-app.use(cors())
+app.options('*', (cors() as any))
+app.use(cors({
+    origin: true,
+}))
 
 app.post('/backgrounds', (req, res) => {
     return res.send('ok')
