@@ -1,4 +1,5 @@
 import express from 'express'
+import { db } from '../db'
 
 const backgroundRouter = express.Router()
 
@@ -9,11 +10,12 @@ backgroundRouter.route('/')
         return res.send('GET /backgrounds')
     })
     // POST /backgrounds
-    .post((req, res) => {
+    .post(async (req, res) => {
         // TODO: Process the background
         // TODO: Save the background to Mongo as a single large document
         // TODO: Save the background to Mongo as many small documents
-        return res.send(req.body)
+        const backgrounds = await db.collection('backgrounds').find().toArray()
+        return res.send(backgrounds)
     })
 
 backgroundRouter.route('/:backgroundId')
