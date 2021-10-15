@@ -1,27 +1,33 @@
-// import express from 'express'
+import express from 'express'
 
-// const backgroundRouter = express.Router()
+const backgroundRouter = express.Router()
 
-// backgroundRouter.post('/backgrounds', (req, res) => {
-//     // TODO: Process the background
-//     // TODO: Save the background to Mongo as a single large document
-//     // TODO: Save the background to Mongo as many small documents
-//     return res.send({
-//         function: 'create',
-//         status: 'ok',
-//     })
-// })
+backgroundRouter.route('/')
+    // GET /backgrounds
+    .get((req, res) => {
+        // TODO: Retrieve all backgrounds from Mongo (those that are single documents or those that are many documents)
+        return res.send('GET /backgrounds')
+    })
+    // POST /backgrounds
+    .post((req, res) => {
+        // TODO: Process the background
+        // TODO: Save the background to Mongo as a single large document
+        // TODO: Save the background to Mongo as many small documents
+        return res.send(req.body)
+    })
 
-// // TODO: Add a `fetchAll` handler to fetch backgrounds from Mongo (single document or many documents)
-// backgroundRouter.get('/backgrounds', (req, res) => {
-// TODO: Retrieve all the backgrounds from Mongo (those that are single documents or those that are many documents)
-// })
+backgroundRouter.route('/:backgroundId')
+    // GET /backgrounds/:backgroundId
+    .get((req, res) => {
+        // TODO: Retrieve a background by its objectId
+        return res.send('GET /backgrounds/:backgroundId')
+    })
+    // PATCH /backgrounds/:backgroundId
+    .patch((req, res) => {
+        // TODO: Update a background by its objectId
+        return res.send('PATCH /backgrounds/:backgroundId')
+    })
 
-// // TODO: Add a `fetchById` handler to fetch a single background by its objectId (single document or many documents)
-// backgroundRouter.get('/backgrounds/:id', (req, res) => {
-//     // TODO: Retrieve a single background by its objectId (single document or many documents)
-// })
-
-// export { 
-//     backgroundRouter,
-// }
+export { 
+    backgroundRouter,
+}

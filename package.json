@@ -2,7 +2,7 @@
     "name": "quest-mix-api",
     "version": "0.1.0",
     "description": "Quest Mix API",
-    "main": "dist/index.js",
+    "main": "index.ts",
     "scripts": {
         "build": "tsc -p .",
         "dev": "npm run build && npm start",
@@ -23,7 +23,7 @@
         "typescript": "4.4.4"
     },
     "engines": {
-        "node": "14.15.5",
-        "npm": "6.14.11"
+        "node": "16.11.1",
+        "npm": "8.0.0"
     }
 }

@@ -1,8 +1,8 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-// import { stream } from './routes/stream'
-// import { backgroundRouter } from './routes/backgrounds'
+import { streamRouter } from './routes/stream'
+import { backgroundRouter } from './routes/backgrounds'
 
 dotenv.config()
 
@@ -26,30 +26,18 @@ const app = express()
 // CORS
 app.use(cors())
 
-// Parse application/x-www-form-urlencoded
-app.use(express.urlencoded({
-    extended: false,
-    limit: '50mb',
-}))
-// Parse application/json
+// Handle Content-Type application/json
 app.use(express.json({
     limit: '50mb',
 }))
 
-app.use('/backgrounds', (req, res, next) => {
-    res.send({
-        message: 'ok',
-    })
-    next()
-})
+app.use(express.static('public'))
 
-// app.use(express.static('public'))
+// Streaming
+app.get('/stream', streamRouter)
 
-// // Streaming
-// app.get('/stream', stream)
-
-// // Backgrounds
-// app.use(backgroundRouter)
+// Backgrounds
+app.use('/backgrounds', backgroundRouter)
 
 app.listen(port, () => {
     /* eslint-disable-next-line no-console */
