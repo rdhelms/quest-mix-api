@@ -6,9 +6,6 @@ import { backgroundRouter } from './routes/backgrounds'
 
 dotenv.config()
 
-const port = process.env.PORT || 5000
-const serverURL = process.env.ROOT_URL || `http://localhost:${port}`
-
 // Create our Express app
 const app = express()
 
@@ -39,7 +36,9 @@ app.get('/stream', streamRouter)
 // Backgrounds
 app.use('/backgrounds', backgroundRouter)
 
+const port = process.env.PORT || 5000
+
 app.listen(port, () => {
     /* eslint-disable-next-line no-console */
-    console.log(`Started server at ${serverURL}`)
+    console.log(`Server is listening on port ${port}`)
 })
