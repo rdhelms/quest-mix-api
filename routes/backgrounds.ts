@@ -1,21 +1,26 @@
 import express from 'express'
-import { db } from '../db'
+import { backgroundCollection } from '../db'
 
 const backgroundRouter = express.Router()
 
 backgroundRouter.route('/')
     // GET /backgrounds
-    .get((req, res) => {
-        // TODO: Retrieve all backgrounds from Mongo (those that are single documents or those that are many documents)
-        return res.send('GET /backgrounds')
+    .get(async (req, res) => {
+        const backgrounds = await backgroundCollection.find().toArray()
+        return res.send(backgrounds)
     })
     // POST /backgrounds
     .post(async (req, res) => {
-        // TODO: Process the background
-        // TODO: Save the background to Mongo as a single large document
-        // TODO: Save the background to Mongo as many small documents
-        const backgrounds = await db.collection('backgrounds').find().toArray()
-        return res.send(backgrounds)
+        const name = req.body.name
+
+        if (!name) {
+            return res.status(400).send('Missing required property: name')
+        }
+
+        const result = await backgroundCollection.insertOne({
+            name,
+        })
+        return res.send(result)
     })
 
 backgroundRouter.route('/:backgroundId')
