@@ -3,6 +3,7 @@ import { createServer } from 'http'
 import { Server } from 'socket.io'
 import { createAdapter } from '@socket.io/redis-adapter'
 import { createClient } from 'redis'
+import cors from 'cors'
 import dotenv from 'dotenv'
 import { streamRouter } from './routes/stream'
 import { backgroundRouter } from './routes/backgrounds'
@@ -40,6 +41,8 @@ connectToDatabase().then(() => {
             ? res.redirect('https://' + req.get('host') + req.url)
             : next()
     })
+
+    app.use(cors())
 
     // Handle Content-Type application/json
     app.use(express.json({
